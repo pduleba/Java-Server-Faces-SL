@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.pduleba.primefaces</groupId>
-	<artifactId>project-primefaces</artifactId>
+	<artifactId>project-primefaces-5.3</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>project-primefaces</name>
+	<name>project-primefaces-5.3</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -36,7 +36,7 @@
 	</properties>
 
 	<build>
-		<finalName>project-primefaces-4.5</finalName>
+		<finalName>project-primefaces-5.3</finalName>
 
 		<plugins>
 			<plugin>
