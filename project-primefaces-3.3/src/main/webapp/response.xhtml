@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:head>
+		<title>JSF 2.2</title>
+	</h:head>
+	<h:body bgcolor="white">
+		<p:carousel numVisible="1" effect="easeInStrong" headerText="Tabs" style="margin-bottom:0">
+	        <p:tab title="Godfather Part I">
+	            <h:panelGrid columns="2" cellpadding="10">
+	                <p:graphicImage value="images/godfather/godfather1.jpg" alt="img1"/>
+	                <h:outputText value="Some text 1" />
+	            </h:panelGrid>
+	        </p:tab>
+	        <p:tab title="Godfather Part II">
+	            <h:panelGrid columns="2" cellpadding="10">
+	                <p:graphicImage value="images/godfather/godfather2.jpg" alt="img2"/>
+	                <h:outputText value="Some text 2" />
+					Response : <h:outputText value="#{sessionBean.response}" />
+	            </h:panelGrid>
+	        </p:tab>
+	        <p:tab title="Godfather Part III">
+	            <h:panelGrid columns="2" cellpadding="10">
+	                <p:graphicImage value="images/godfather/godfather3.jpg" alt="img3"/>
+	                <h:outputText value="Some text 3" />
+	            </h:panelGrid>
+	        </p:tab>
+	    </p:carousel>
+	</h:body>
+</html>
