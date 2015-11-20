@@ -33,7 +33,7 @@
 	</session-config>
 
 	<welcome-file-list>
-		<welcome-file>faces/index.xhtml</welcome-file>
+		<welcome-file>faces/request.xhtml</welcome-file>
 	</welcome-file-list>
 
 

@@ -1,11 +1,11 @@
-package com.pduleba.spring;
+package com.pduleba.spring.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import lombok.Data;
 
-@Component
+@Service
 public @Data class MessageServiceImpl implements MessageService {
 	
 	@Autowired

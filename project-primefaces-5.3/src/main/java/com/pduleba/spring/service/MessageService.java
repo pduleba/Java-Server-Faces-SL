@@ -1,4 +1,4 @@
-package com.pduleba.spring;
+package com.pduleba.spring.service;
 
 public interface MessageService {
 

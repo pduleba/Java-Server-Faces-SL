@@ -1,4 +1,4 @@
-package com.pduleba.jsf;
+package com.pduleba.web;
 
 
 import java.io.Serializable;
@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.pduleba.common.Action;
-import com.pduleba.spring.MessageService;
+import com.pduleba.spring.service.MessageService;
 
 import lombok.Data;
 
