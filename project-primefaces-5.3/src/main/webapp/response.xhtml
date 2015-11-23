@@ -12,23 +12,23 @@
 	</h:head>
 	<h:body bgcolor="white">
 		<p:carousel numVisible="1" effect="easeInStrong" headerText="Tabs" style="margin-bottom:0">
-	        <p:tab title="Godfather Part I">
+	        <p:tab title="Users from DB">
 	            <h:panelGrid columns="2" cellpadding="10">
-	                <p:graphicImage value="images/godfather/godfather1.jpg" alt="img1"/>
-	                <h:outputText value="Some text 1" />
+	                <h:outputText value="Users from DB:" />
 	            </h:panelGrid>
 	        </p:tab>
-	        <p:tab title="Godfather Part II">
+	        <p:tab title="Submit time">
 	            <h:panelGrid columns="2" cellpadding="10">
-	                <p:graphicImage value="images/godfather/godfather2.jpg" alt="img2"/>
-	                <h:outputText value="Some text 2" />
-					Response : <h:outputText value="#{sessionBean.response}" />
+	                <h:outputText value="Submit time : " />
+					<h:outputText value="#{sessionBean.time}" />
 	            </h:panelGrid>
 	        </p:tab>
-	        <p:tab title="Godfather Part III">
+	        <p:tab title="WWW Link">
 	            <h:panelGrid columns="2" cellpadding="10">
-	                <p:graphicImage value="images/godfather/godfather3.jpg" alt="img3"/>
-	                <h:outputText value="Some text 3" />
+					<p:panelGrid columns="2">
+						<h:outputText value="QR" />
+						<p:barcode value="https://www.google.pl/#q=#{sessionBean.name}" type="qr" />
+					</p:panelGrid>
 	            </h:panelGrid>
 	        </p:tab>
 	    </p:carousel>

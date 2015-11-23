@@ -18,15 +18,12 @@
 		<h:form>
 			<h:message for="name" />
 
-			<h:inputText id="name" value="#{sessionBean.input}">
+			<h:outputLabel value="Enter name:"/>
+			<h:inputText id="name" value="#{sessionBean.name}">
 				<f:validateRequired for="name" />
 			</h:inputText>
-			<h:commandButton value="Click me" action="#{sessionBean.doAction}" />
+			<h:commandButton value="Submit" action="#{sessionBean.doAction}" />
 		</h:form>
 	</p:outputPanel>
-	<p:panelGrid columns="2">
-		<h:outputText value="QR" />
-		<p:barcode value="https://www.pgs-soft.com/pl/?t=" type="qr" />
-	</p:panelGrid>
 </h:body>
 </html>

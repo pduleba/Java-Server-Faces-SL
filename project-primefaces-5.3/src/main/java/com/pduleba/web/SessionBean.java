@@ -2,17 +2,19 @@ package com.pduleba.web;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.pduleba.common.Action;
-import com.pduleba.spring.service.MessageService;
+import com.pduleba.spring.dao.model.UserModel;
+import com.pduleba.spring.service.LogService;
+import com.pduleba.spring.service.TimeService;
+import com.pduleba.spring.service.UserService;
 
 import lombok.Data;
 
@@ -23,34 +25,29 @@ public @Data class SessionBean implements Serializable {
 
 	private static final long serialVersionUID = 1549481937223946546L;
 
-	private final static Logger LOG = LoggerFactory.getLogger(SessionBean.class);
+	private String name;
 	
-	private String input;
-	
-	private String response;
+	private String time;
+
+	private List<UserModel> users = new ArrayList<>();
 	
 	@Autowired
-	private MessageService messageService;
+	private UserService userService;
+	
+	@Autowired
+	private TimeService timeService;
+	
+	@Autowired
+	private LogService logService;
 
 	public String doAction() {
-		return interceptAction(() -> componseReponseTask(), "doAction", "response");
-	}
-
-	private String interceptAction(final Action<String> action, final String actionName, final String response) {
-		logMe(actionName);
+		logService.logDebug("doAction :: starting...");
 		
-		action.execute();
+		setTime(timeService.getCurrentDateString());
+		userService.createUser(this.name);
+		users = userService.getUsers();
+		logService.logDebug("doAction :: complete");
 		
-		return response;
-	}
-
-	private void componseReponseTask() {
-		setResponse(messageService.getMessage(this.input));
-	}
-
-	private void logMe(String action) {
-		if (LOG.isInfoEnabled()) {
-			LOG.info(new StringBuilder(action).append(" :: executed ").toString());
-		}
+		return "response";
 	}
 }
