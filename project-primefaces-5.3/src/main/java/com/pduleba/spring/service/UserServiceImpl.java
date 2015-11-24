@@ -4,13 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.pduleba.spring.dao.UserDao;
 import com.pduleba.spring.dao.model.UserModel;
 
 @Service
-@Transactional
 public class UserServiceImpl implements UserService {
 
 	@Autowired

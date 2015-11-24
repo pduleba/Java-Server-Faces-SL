@@ -2,9 +2,8 @@ package com.pduleba.spring.dao.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -14,7 +13,7 @@ import lombok.Data;
 public @Data class UserModel {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="USERS_SEQ")
+	@SequenceGenerator(name="USERS_SEQ", allocationSize=1)
 	@Column(name="id")
 	private Long id;
 	
