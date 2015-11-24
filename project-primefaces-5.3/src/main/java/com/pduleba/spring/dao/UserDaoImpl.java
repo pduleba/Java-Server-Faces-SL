@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.pduleba.spring.dao.model.UserModel;
 
 @Repository
-@Transactional(readOnly=false)
+@Transactional
 public class UserDaoImpl implements UserDao {
 
 	private HibernateTemplate template;

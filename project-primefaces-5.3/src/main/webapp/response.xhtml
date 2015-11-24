@@ -16,6 +16,17 @@
 	            <h:panelGrid columns="2" cellpadding="10">
 	                <h:outputText value="Users from DB:" />
 	            </h:panelGrid>
+	            <p:dataTable var="user" value="#{sessionBean.users}">
+	            	<p:column headerText="Id">
+	            		<h:outputText value="#{user.id}" />
+	            	</p:column>
+	            	<p:column headerText="Name">
+	            		<h:outputText value="#{user.name}" />
+	            	</p:column>
+	            	<p:column headerText="Creation date">
+	            		<h:outputText value="#{user.creationDate}" converter="TimestampConverter"/>
+	            	</p:column>
+	            </p:dataTable>
 	        </p:tab>
 	        <p:tab title="Submit time">
 	            <h:panelGrid columns="2" cellpadding="10">
@@ -32,5 +43,6 @@
 	            </h:panelGrid>
 	        </p:tab>
 	    </p:carousel>
+	    <p:link outcome="request" value="Go back"/>
 	</h:body>
 </html>

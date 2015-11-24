@@ -1,5 +1,8 @@
 package com.pduleba.spring.dao.model;
 
+import java.sql.Timestamp;
+import java.util.Calendar;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,8 +26,12 @@ public @Data @NoArgsConstructor class UserModel {
 	@Column(name="name")
 	private String name;
 
+	@Column(name="creation_date")
+	private Timestamp creationDate;
+	
 	public UserModel(String name) {
 		this.name = name;
+		this.creationDate = new Timestamp(Calendar.getInstance().getTimeInMillis());
 	}
 
 }

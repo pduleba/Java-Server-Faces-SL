@@ -4,8 +4,9 @@ GRANT ALL PRIVILEGE TO pduleba;
 
 -- on pduleba
 CREATE TABLE users (
-  id              NUMBER(15),
-  name            VARCHAR2(100 CHAR),
+  id              	NUMBER(15),
+  name            	VARCHAR2(100 CHAR),
+  creation_date	  	TIMESTAMP,
   CONSTRAINT user_pk
     PRIMARY KEY (id)
 );
