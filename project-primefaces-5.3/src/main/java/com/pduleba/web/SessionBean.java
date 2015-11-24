@@ -41,12 +41,12 @@ public @Data class SessionBean implements Serializable {
 	private LogService logService;
 
 	public String doAction() {
-		logService.logDebug("doAction :: starting...");
+		logService.logInfo("doAction :: starting...");
 		
 		setTime(timeService.getCurrentDateString());
 		userService.createUser(this.name);
 		users = userService.getUsers();
-		logService.logDebug("doAction :: complete");
+		logService.logInfo("doAction :: complete");
 		
 		return "response";
 	}

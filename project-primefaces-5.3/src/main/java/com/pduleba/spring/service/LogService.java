@@ -2,6 +2,6 @@ package com.pduleba.spring.service;
 
 public interface LogService {
 
-	void logDebug(String string);
+	void logInfo(String string);
 
 }

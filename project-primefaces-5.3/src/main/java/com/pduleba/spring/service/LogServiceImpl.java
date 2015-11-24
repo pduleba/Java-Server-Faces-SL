@@ -10,8 +10,8 @@ class LogServiceImpl implements LogService {
 	private static Logger LOG = LoggerFactory.getLogger(LogServiceImpl.class);
 	
 	@Override
-	public void logDebug(String msg) {
-		if (LOG.isDebugEnabled()) {
+	public void logInfo(String msg) {
+		if (LOG.isInfoEnabled()) {
 			LOG.info(msg);
 		}
 	}
