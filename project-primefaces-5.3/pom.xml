@@ -43,7 +43,7 @@
 		<!-- Persistence Layer -->
 		<hibernate.version>5.0.4.Final</hibernate.version>
 		<javax.transaction-api.version>1.2</javax.transaction-api.version>
-		<oracle.driver.version>11.2.0.3</oracle.driver.version>
+		<oracle.driver.version>11.2.0.4</oracle.driver.version>
 		<!-- Other -->
 		<junit.version>4.12</junit.version>
 		<lombok.version>1.16.6</lombok.version>
@@ -279,11 +279,4 @@
 			<version>${junit.version}</version>
 		</dependency>
 	</dependencies>
-
-	<repositories>
-		<repository>
-			<id>codelds</id>
-			<url>https://code.lds.org/nexus/content/groups/main-repo</url>
-		</repository>
-	</repositories>
 </project>

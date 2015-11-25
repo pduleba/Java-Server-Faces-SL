@@ -42,11 +42,7 @@
 			</props>
 		</property>
 
-		<property name="annotatedClasses">
-			<list>
-				<value>com.pduleba.spring.dao.model.UserModel</value>
-			</list>
-		</property>
+		<property name="packagesToScan" value="com.pduleba.spring.dao.model" />
 	</bean>
 
 	<bean id="transactionManager"
