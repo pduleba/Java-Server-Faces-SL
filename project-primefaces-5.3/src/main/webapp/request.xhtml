@@ -18,7 +18,7 @@
 		<h:form>
 			<h:message for="name" />
 
-			<h:outputLabel value="Enter name:"/>
+			<h:outputLabel value="Enter name:" for="name"/>
 			<h:inputText id="name" value="#{sessionBean.name}">
 				<f:validateRequired for="name" />
 			</h:inputText>

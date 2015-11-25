@@ -3,8 +3,10 @@ package com.pduleba.spring.dao;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate5.HibernateTemplate;
+import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,22 +14,22 @@ import com.pduleba.spring.dao.model.UserModel;
 
 @Repository
 @Transactional
-public class UserDaoImpl implements UserDao {
+public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 
-	private HibernateTemplate template;
+	private static final Logger LOG = LoggerFactory.getLogger(UserDaoImpl.class);
 	
+	// DI by Constructor (you can use init method/setter)
 	@Autowired
-	public void setSessionFactory(SessionFactory sessionFactory){
-		this.template = new HibernateTemplate(sessionFactory);
+	public UserDaoImpl(SessionFactory sessionFactory) {
+		super.setSessionFactory(sessionFactory);
 	}
 	
-	@Override
 	public List<UserModel> getAllUsers() {
-		return template.loadAll(UserModel.class);
+		return getHibernateTemplate().loadAll(UserModel.class);
 	}
 
 	@Override
 	public void save(UserModel user) {
-		template.save(user);
+		getHibernateTemplate().save(user);
 	}
 }
