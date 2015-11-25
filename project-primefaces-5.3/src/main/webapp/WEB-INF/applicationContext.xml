@@ -11,14 +11,9 @@
 
 	<context:component-scan base-package="com.pduleba.spring, com.pduleba.web" />
 	<context:annotation-config />
+	<context:property-placeholder location="WEB-INF/classes/config/database/database.properties"/>
+	
 	<tx:annotation-driven transaction-manager="transactionManager" />
-
-	<bean
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="location">
-			<value>WEB-INF/classes/config/database/database.properties</value>
-		</property>
-	</bean>
 
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -37,6 +32,7 @@
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+				<prop key="hibernate.default_schema">${hibernate.default_schema}</prop>
 				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
 				<prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
 			</props>

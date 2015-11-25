@@ -15,7 +15,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="users", schema="pduleba")
+@Table(name="users")
 @SequenceGenerator(name="user_db_seq", allocationSize=1, sequenceName="USERS_SEQ")
 public @Data @NoArgsConstructor class UserModel {
 
