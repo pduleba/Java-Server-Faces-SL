@@ -19,8 +19,8 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			WEB-INF\springConfig\applicationContext.xml
-			WEB-INF\springConfig\applicationSecurityContext.xml
+			WEB-INF\spring\applicationContext.xml
+			WEB-INF\spring\applicationSecurityContext.xml
 		</param-value>
 	</context-param>
 
@@ -42,7 +42,7 @@
 	</session-config>
 
 	<welcome-file-list>
-		<welcome-file>faces/request.xhtml</welcome-file>
+		<welcome-file>views/request.xhtml</welcome-file>
 	</welcome-file-list>
 
 

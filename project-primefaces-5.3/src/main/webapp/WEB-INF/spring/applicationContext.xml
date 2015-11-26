@@ -1,13 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:tx="http://www.springframework.org/schema/tx"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
-	http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
-	http://www.springframework.org/schema/context
-	http://www.springframework.org/schema/context/spring-context-4.2.xsd
- 	http://www.springframework.org/schema/tx
-    http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
 
 	<context:component-scan base-package="com.pduleba.spring, com.pduleba.web" />
 	<context:annotation-config />
@@ -16,19 +17,20 @@
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
-	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
 		<property name="driverClass" value="${jdbc.driverClass}" />
 		<property name="jdbcUrl" value="${jdbc.jdbcUrl}" />
 		<property name="user" value="${jdbc.user}" />
 		<property name="password" value="${jdbc.password}" />
- 		
- 		<!-- c3p0 related settings -->
- 		<property name="initialPoolSize" value="${c3p0.initialPoolSize}"/>
- 		<property name="minPoolSize" value="${c3p0.minPoolSize}"/>
- 		<property name="maxPoolSize" value="${c3p0.maxPoolSize}"/>
- 		<property name="maxIdleTime" value="${c3p0.maxIdleTime}"/>
- 		<property name="acquireIncrement" value="${c3p0.acquireIncrement}"/>
- 	</bean>
+
+		<!-- c3p0 related settings -->
+		<property name="initialPoolSize" value="${c3p0.initialPoolSize}" />
+		<property name="minPoolSize" value="${c3p0.minPoolSize}" />
+		<property name="maxPoolSize" value="${c3p0.maxPoolSize}" />
+		<property name="maxIdleTime" value="${c3p0.maxIdleTime}" />
+		<property name="acquireIncrement" value="${c3p0.acquireIncrement}" />
+	</bean>
 
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">

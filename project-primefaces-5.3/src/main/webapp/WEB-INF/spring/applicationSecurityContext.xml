@@ -6,6 +6,11 @@
 		http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
 		http://www.springframework.org/schema/security 
 		http://www.springframework.org/schema/security/spring-security-4.0.xsd">
-	
+
+	<!-- <security:authentication-manager erase-credentials="true">
+		<security:authentication-provider ref="" >
+			<security:jdbc-user-service data-source-ref=""/>
+		</security:authentication-provider> 
+	</security:authentication-manager> -->	
 
 </beans>

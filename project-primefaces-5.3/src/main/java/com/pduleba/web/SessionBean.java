@@ -48,6 +48,6 @@ public @Data class SessionBean implements Serializable {
 		users = userService.getUsers();
 		logService.logInfo("doAction :: complete");
 		
-		return "response";
+		return "/views/response?faces-redirect=true";
 	}
 }
