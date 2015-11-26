@@ -8,11 +8,21 @@
 
 	<!-- Add Support for Spring -->
 	<listener>
+		<description>Bootstrap listener to start up and shut down Spring's root WebApplicationContext.</description>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	<listener>
+		<description>This listener is mainly for use with third-party servlets, e.g. the JSF FacesServlet.</description>
 		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
 	</listener>
+	
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			WEB-INF\springConfig\applicationContext.xml
+			WEB-INF\springConfig\applicationSecurityContext.xml
+		</param-value>
+	</context-param>
 
 	<!-- JSF Configuration -->
 	<servlet>

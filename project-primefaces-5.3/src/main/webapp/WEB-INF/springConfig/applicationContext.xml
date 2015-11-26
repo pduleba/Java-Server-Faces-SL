@@ -11,17 +11,24 @@
 
 	<context:component-scan base-package="com.pduleba.spring, com.pduleba.web" />
 	<context:annotation-config />
-	<context:property-placeholder location="WEB-INF/classes/config/database/database.properties"/>
-	
+	<context:property-placeholder
+		location="WEB-INF/classes/config/database/database.properties" />
+
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
-	<bean id="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="${jdbc.driverClassName}" />
-		<property name="url" value="${jdbc.url}" />
-		<property name="username" value="${jdbc.username}" />
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="driverClass" value="${jdbc.driverClass}" />
+		<property name="jdbcUrl" value="${jdbc.jdbcUrl}" />
+		<property name="user" value="${jdbc.user}" />
 		<property name="password" value="${jdbc.password}" />
-	</bean>
+ 		
+ 		<!-- c3p0 related settings -->
+ 		<property name="initialPoolSize" value="${c3p0.initialPoolSize}"/>
+ 		<property name="minPoolSize" value="${c3p0.minPoolSize}"/>
+ 		<property name="maxPoolSize" value="${c3p0.maxPoolSize}"/>
+ 		<property name="maxIdleTime" value="${c3p0.maxIdleTime}"/>
+ 		<property name="acquireIncrement" value="${c3p0.acquireIncrement}"/>
+ 	</bean>
 
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
