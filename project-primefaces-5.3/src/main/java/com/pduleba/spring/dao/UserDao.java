@@ -10,4 +10,6 @@ public interface UserDao {
 
 	void save(UserModel user);
 
+	UserModel findByName(String name);
+
 }

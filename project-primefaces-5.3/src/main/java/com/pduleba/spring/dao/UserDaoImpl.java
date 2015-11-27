@@ -28,4 +28,10 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 	public void save(UserModel user) {
 		getHibernateTemplate().save(user);
 	}
+
+	@Override
+	public UserModel findByName(String name) {
+		// TODO
+		return null;
+	}
 }

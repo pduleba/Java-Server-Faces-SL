@@ -7,10 +7,44 @@
 		http://www.springframework.org/schema/security 
 		http://www.springframework.org/schema/security/spring-security-4.0.xsd">
 
-	<!-- <security:authentication-manager erase-credentials="true">
-		<security:authentication-provider ref="" >
-			<security:jdbc-user-service data-source-ref=""/>
-		</security:authentication-provider> 
-	</security:authentication-manager> -->	
+	<import resource="applicationContext.xml"/>
+	
+	<!-- Authentication configuration -->
+	<security:http authentication-manager-ref="authenticationManager" auto-config="true" > <!-- TODO -->
+
+		<!-- Login-in logic -->
+		<security:form-login 
+			username-parameter="username"
+			password-parameter="password" 
+			login-processing-url="/login"
+			default-target-url="/views/user/index.jsp"
+			login-page="/views/security/login.jsp"
+			authentication-failure-url="/views/security/error.jsp" />
+			
+		<!-- Logout logic -->
+		<security:logout
+			invalidate-session="true"
+			logout-url="/logout"
+			logout-success-url="/views/security/logout.jsp"
+			delete-cookies="JSESSIONID" />
+
+		<security:intercept-url pattern="/views/security/**" access="permitAll" />
+		<security:intercept-url pattern="/views/user/**" access="hasRole('USER')" />
+		
+		<security:access-denied-handler error-page="/views/security/denied.jsp"/>
+		
+		<security:csrf disabled="true"/>
+	</security:http>
+
+	<!-- How to authenticate -->
+	<security:authentication-manager id="authenticationManager" erase-credentials="true">
+		<security:authentication-provider >
+			<security:user-service>
+				<security:user name="abc" password="123" authorities="ROLE_USER" />
+			</security:user-service>
+		</security:authentication-provider>
+	</security:authentication-manager>	
+	
+	<bean id="userAuthenticationProvider" class="com.pduleba.spring.security.UserDetailsAuthenticationProvider" />
 
 </beans>

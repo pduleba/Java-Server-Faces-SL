@@ -8,21 +8,25 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<title>JSF 2.2 Example</title>
+	<title>Login Page</title>
 </h:head>
 <h:body>
 	<p:outputPanel>
 		<f:facet name="header">
-			JSF 2.2 Example - index.xhtml
+			Login Page
 	    </f:facet>
 		<h:form>
-			<h:message for="name" />
+			<h:messages />
 
-			<h:outputLabel value="Enter name:" for="name"/>
-			<h:inputText id="name" value="#{sessionBean.name}">
-				<f:validateRequired for="name" />
+			<h:outputLabel value="Enter name:" for="j_password"/>
+			<h:inputText id="j_username" >
+				<f:validateRequired for="j_username" />
 			</h:inputText>
-			<h:commandButton value="Submit" action="#{sessionBean.doAction}" />
+			<h:outputLabel value="Enter password:" for="j_password"/>
+			<h:inputSecret id="j_password">
+				<f:validateRequired for="j_password" />
+			</h:inputSecret>
+			<h:commandButton value="Submit" action="login" />
 		</h:form>
 	</p:outputPanel>
 </h:body>

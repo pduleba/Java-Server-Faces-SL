@@ -25,6 +25,9 @@ public @Data @NoArgsConstructor class UserModel {
 	
 	@Column(name="name")
 	private String name;
+	
+	@Column(name="password")
+	private String password;
 
 	@Column(name="creation_date")
 	private Timestamp creationDate;

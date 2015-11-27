@@ -6,7 +6,7 @@
 
 	<display-name>Primefaces 5.3 Application</display-name>
 
-	<!-- Add Support for Spring -->
+	<!-- Spring -->
 	<listener>
 		<description>Bootstrap listener to start up and shut down Spring's root WebApplicationContext.</description>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -15,7 +15,19 @@
 		<description>This listener is mainly for use with third-party servlets, e.g. the JSF FacesServlet.</description>
 		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
 	</listener>
-	
+
+	<!-- Spring Security -->
+	<filter>
+		<description>Proxy for a standard Servlet Filter, delegating to a Spring-managed bean that implements the Filter interface.</description>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
@@ -42,7 +54,7 @@
 	</session-config>
 
 	<welcome-file-list>
-		<welcome-file>views/request.xhtml</welcome-file>
+		<welcome-file>welcome.jsp</welcome-file>
 	</welcome-file-list>
 
 
