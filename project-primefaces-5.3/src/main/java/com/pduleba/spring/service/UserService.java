@@ -6,7 +6,7 @@ import com.pduleba.spring.dao.model.UserModel;
 
 public interface UserService {
 
-	void createUser(String name);
+	boolean createUser(UserModel user);
 
 	List<UserModel> getUsers();
 

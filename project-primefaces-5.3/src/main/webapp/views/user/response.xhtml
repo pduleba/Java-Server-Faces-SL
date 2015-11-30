@@ -43,7 +43,11 @@
 	            </h:panelGrid>
 	        </p:tab>
 	    </p:carousel>
-	    <p:link outcome="/views/request" value="Go back"/>
-	    <p:link outcome="/logout" value="Logout"/>
+	    <div align="right">
+		    <p:link outcome="/views/user/index.xhtml" value="Go back"/>
+		    <h:form>
+			    <p:commandLink value="Logout" action="#{loginBean.logout()}"/>
+		    </h:form>
+	    </div>
 	</h:body>
 </html>

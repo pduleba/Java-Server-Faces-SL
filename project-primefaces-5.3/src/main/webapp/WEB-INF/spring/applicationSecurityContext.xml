@@ -10,28 +10,27 @@
 	<import resource="applicationContext.xml"/>
 	
 	<!-- Authentication configuration -->
-	<security:http authentication-manager-ref="authenticationManager" auto-config="true" > <!-- TODO -->
+	<security:http authentication-manager-ref="authenticationManager" auto-config="true" use-expressions="true"> <!-- TODO -->
 
 		<!-- Login-in logic -->
 		<security:form-login 
 			username-parameter="username"
 			password-parameter="password" 
-			login-processing-url="/login"
-			default-target-url="/views/user/index.jsp"
-			login-page="/views/security/login.jsp"
-			authentication-failure-url="/views/security/error.jsp" />
+			default-target-url="/views/user/index.xhtml"
+			login-page="/views/security/login.xhtml"
+			authentication-failure-url="/views/security/error.xhtml" />
 			
 		<!-- Logout logic -->
 		<security:logout
 			invalidate-session="true"
 			logout-url="/logout"
-			logout-success-url="/views/security/logout.jsp"
+			logout-success-url="/views/security/logout.xhtml"
 			delete-cookies="JSESSIONID" />
 
 		<security:intercept-url pattern="/views/security/**" access="permitAll" />
 		<security:intercept-url pattern="/views/user/**" access="hasRole('USER')" />
 		
-		<security:access-denied-handler error-page="/views/security/denied.jsp"/>
+		<security:access-denied-handler error-page="/views/security/denied.xhtml"/>
 		
 		<security:csrf disabled="true"/>
 	</security:http>
@@ -44,7 +43,5 @@
 			</security:user-service>
 		</security:authentication-provider>
 	</security:authentication-manager>	
-	
-	<bean id="userAuthenticationProvider" class="com.pduleba.spring.security.UserDetailsAuthenticationProvider" />
 
 </beans>

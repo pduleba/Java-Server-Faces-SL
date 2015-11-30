@@ -54,7 +54,7 @@
 	</session-config>
 
 	<welcome-file-list>
-		<welcome-file>welcome.jsp</welcome-file>
+		<welcome-file>welcome.xhtml</welcome-file>
 	</welcome-file-list>
 
 

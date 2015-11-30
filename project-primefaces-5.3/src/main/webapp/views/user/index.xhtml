@@ -22,8 +22,18 @@
 			<h:inputText id="name" value="#{sessionBean.name}">
 				<f:validateRequired for="name" />
 			</h:inputText>
-			<h:commandButton value="Submit" action="#{sessionBean.doAction}" />
+			<h:commandButton value="Submit" action="#{sessionBean.createUser()}" />
+			<h:commandButton value="Show users"
+				action="#{sessionBean.showUsers()}" />
 		</h:form>
+		<div align="right">
+			<h:form>
+				<p:commandLink value="Logout" action="#{loginBean.logout()}" />
+			</h:form>
+		</div>
+		<div>
+			<h:messages showDetail="true"/>
+		</div>
 	</p:outputPanel>
 </h:body>
 </html>

@@ -19,6 +19,8 @@ import lombok.NoArgsConstructor;
 @SequenceGenerator(name="user_db_seq", allocationSize=1, sequenceName="USERS_SEQ")
 public @Data @NoArgsConstructor class UserModel {
 
+	private static final String DEFAULT_PASSWORD = "abc";
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="user_db_seq")
 	private Long id;
@@ -34,6 +36,7 @@ public @Data @NoArgsConstructor class UserModel {
 	
 	public UserModel(String name) {
 		this.name = name;
+		this.password = DEFAULT_PASSWORD;
 		this.creationDate = new Timestamp(Calendar.getInstance().getTimeInMillis());
 	}
 

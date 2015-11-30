@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Login Page</title>
+</h:head>
+<h:body>
+	    <div align="right" >
+	        <h:form  id="loginFormId" prependId="false">
+	                <div id="loginFieldsPnlId">
+	                    <div id="loginFieldUsrContId">
+	                        <h:outputText id="outTxtUserNameId" value="Username: " name="outTxtUserNameNm" />
+	                        <h:inputText id="userName" required="true" value="#{loginBean.userName}" requiredMessage="Please enter username" />
+	                        <h:outputLabel id="outLblUserNameId" for="userName" name="outLblUserNameNm" />
+	                    </div>
+	                    <div id="loginFieldPassContId">
+	                        <h:outputText id="outTxtPasswordId" value="Password: " name="outTxtPasswordNm" />
+	                        <h:inputSecret id="password"  required="true" value="#{loginBean.password}" requiredMessage="Please enter password" name="inTxtPasswordNm" />
+	                        <h:outputLabel id="outLblPasswordId" for="password" name="outLblPasswordNm" />
+	                    </div>
+	                </div>
+	                <div id="loginBtnPanelId">
+	                    <h:commandButton id="btnLoginId" value="Login" action="#{loginBean.login()}" styleClass="loginPanelBtn" />
+	                </div>
+	        </h:form>
+	    </div>
+	    <div>
+	        <h:messages />
+	    </div>
+	</h:body>
+</html>

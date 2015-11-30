@@ -3,11 +3,10 @@ package com.pduleba.spring.service;
 import java.util.List;
 import java.util.Objects;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.dao.SaltSource;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.pduleba.spring.dao.UserDao;
@@ -17,27 +16,21 @@ import com.pduleba.spring.security.AppUser;
 @Service(value="userService")
 public class UserServiceImpl implements UserService, UserDetailsService {
 
-	private static final String DEFAULT_PASSWORD = "abc";
+	public static final Logger LOG = LoggerFactory.getLogger(UserServiceImpl.class);
 	
 	@Autowired
 	private UserDao userDao;
 	
-	@Autowired
-	private PasswordEncoder passwordEncoder;
-	
-	@Autowired
-	private SaltSource salt; // TODO
-	
 	@Override
-	public void createUser(String name) {
-		UserModel user = new UserModel(name);
-		user.setPassword(getPasswordHash());
+	public boolean createUser(UserModel user) {
+		if (userDao.exists(user.getName())) {
+			LOG.info(new StringBuilder("User ").append(user.getName()).append(" already exists").toString());
+		} else {
+			userDao.save(user);
+			return true;
+		}
 		
-		userDao.save(user);
-	}
-
-	private String getPasswordHash() {
-		return passwordEncoder.encode(DEFAULT_PASSWORD);
+		return false;
 	}
 
 	@Override
@@ -46,7 +39,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	}
 
 	@Override
-	public AppUser loadUserByUsername(String username) throws UsernameNotFoundException {
+	public AppUser loadUserByUsername(String username) {
 		UserModel user = userDao.findByName(username);
 		return Objects.nonNull(user) ? new AppUser(user) : null;
 	}

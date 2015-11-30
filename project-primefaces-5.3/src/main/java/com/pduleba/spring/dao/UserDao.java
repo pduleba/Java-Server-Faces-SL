@@ -10,6 +10,8 @@ public interface UserDao {
 
 	void save(UserModel user);
 
-	UserModel findByName(String name);
+	boolean exists(String name);
+
+	UserModel findByName(String username);
 
 }
