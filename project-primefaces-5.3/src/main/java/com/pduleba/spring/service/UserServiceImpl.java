@@ -6,7 +6,10 @@ import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.pduleba.spring.dao.UserDao;
@@ -18,14 +21,21 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	public static final Logger LOG = LoggerFactory.getLogger(UserServiceImpl.class);
 	
+	@Value(value="${user.default.password}")
+	private String defaultPassword;
+	
 	@Autowired
 	private UserDao userDao;
 	
+	@Autowired
+	private PasswordEncoder encoder;
+
 	@Override
-	public boolean createUser(UserModel user) {
-		if (userDao.exists(user.getName())) {
-			LOG.info(new StringBuilder("User ").append(user.getName()).append(" already exists").toString());
+	public boolean createUser(String userName) {
+		if (userDao.exists(userName)) {
+			LOG.info(new StringBuilder("User ").append(userName).append(" already exists").toString());
 		} else {
+			UserModel user = new UserModel(userName, encoder.encode(defaultPassword));
 			userDao.save(user);
 			return true;
 		}
@@ -41,7 +51,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	@Override
 	public AppUser loadUserByUsername(String username) {
 		UserModel user = userDao.findByName(username);
-		return Objects.nonNull(user) ? new AppUser(user) : null;
+		if (Objects.nonNull(user)) {
+			return new AppUser(user);
+		} else {
+			throw new UsernameNotFoundException("Unable to load user");
+		}
 	}
 
 }

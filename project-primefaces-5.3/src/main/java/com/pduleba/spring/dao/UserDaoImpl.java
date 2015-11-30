@@ -2,9 +2,11 @@ package com.pduleba.spring.dao;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateCallback;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
@@ -46,6 +48,15 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 	
 	@Override
 	public UserModel findByName(String username) {
-		return (UserModel) getHibernateTemplate().find("from UserModel user where user = ?", username);
+		return getHibernateTemplate().execute(new HibernateCallback<UserModel>() {
+				@Override
+				public UserModel doInHibernate(Session session) throws HibernateException {
+					Criteria criteria = session.createCriteria(UserModel.class);
+	                criteria.add(Restrictions.eq("name", username));
+					return (UserModel) criteria.uniqueResult();
+				}
+		});
+		
+		//find("from UserModel user where user.name = ?", username);
 	}
 }

@@ -52,7 +52,7 @@ public @Data class SessionBean implements Serializable {
 	public String createUser() {
 		logService.logInfo("createUser :: starting...");
 		setTime(timeService.getCurrentDateString());
-		boolean success = userService.createUser(new UserModel(name));
+		boolean success = userService.createUser(name);
 		logService.logInfo("createUser :: complete");
 		
 		if (success) {

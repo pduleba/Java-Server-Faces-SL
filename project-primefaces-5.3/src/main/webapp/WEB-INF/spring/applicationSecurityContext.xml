@@ -37,11 +37,12 @@
 
 	<!-- How to authenticate -->
 	<security:authentication-manager id="authenticationManager" erase-credentials="true">
-		<security:authentication-provider >
-			<security:user-service>
-				<security:user name="abc" password="123" authorities="ROLE_USER" />
-			</security:user-service>
-		</security:authentication-provider>
+		<security:authentication-provider ref="daoAuthenticationProvider" />
 	</security:authentication-manager>	
+
+	<bean id="daoAuthenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+		<property name="userDetailsService" ref="userService"/>
+		<property name="passwordEncoder" ref="passwordEncoder"/>
+	</bean>
 
 </beans>
