@@ -10,5 +10,14 @@
 	</h:head>
 	<h:body>
 		Welcome<h:link outcome="views/security/login" value="Log-in" style="padding-left: 1cm"/>
+		<h:form>
+			<h:message for="name" />
+
+			<h:outputLabel value="Enter name:" for="name" />
+			<h:inputText id="name" value="#{sessionBean.name}">
+				<f:validateRequired for="name" />
+			</h:inputText>
+			<h:commandButton value="Submit" action="#{sessionBean.createUser()}" />
+		</h:form>
 	</h:body>
 </html>
