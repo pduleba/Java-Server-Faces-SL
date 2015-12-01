@@ -60,7 +60,7 @@ public @Data class SessionBean implements Serializable {
 					new FacesMessage("Success", new StringBuilder("User ").append(name).append(" created!").toString()));
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",
-					new StringBuilder("User ").append(name).append(" already exists!").toString()));
+					new StringBuilder("Unable to create user ").append(name).toString()));
 		}
 		
 		return null;
