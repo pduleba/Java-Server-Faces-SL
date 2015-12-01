@@ -8,9 +8,43 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<h:head>
-		<title>JSF 2.2</title>
+		<title>Response</title>
+		<style>
+		#action-box {
+			width: 300px;
+			padding: 20px;
+			margin: 100px auto;
+			background: #fff;
+			-webkit-border-radius: 2px;
+			-moz-border-radius: 2px;
+			border: 1px solid #000;
+		}
+		#menu {
+			width:100%;overflow: auto;padding: 10px 0px;
+		} 
+		#menu #left-menu {
+			float: left; width: 50%; text-align: left;
+		} 
+		#menu #right-menu {
+			float: right; width: 50%; text-align: right;
+		} 
+		.menu-item {
+			padding-left: 1em;
+		}
+		</style>
 	</h:head>
 	<h:body bgcolor="white">
+		<div id="menu">
+			<div id="left-menu">
+				<h:outputText value="Response" />
+			</div>
+			<div id="right-menu">
+			    <p:link outcome="/views/user/index.xhtml" value="Go back"/>
+			    <h:form>
+				    <p:commandLink value="Logout" action="#{loginBean.logout()}"/>
+			    </h:form>
+			</div>
+		</div>
 		<p:carousel numVisible="1" effect="easeInStrong" headerText="Tabs" style="margin-bottom:0">
 	        <p:tab title="Users from DB">
 	            <h:panelGrid columns="2" cellpadding="10">
@@ -43,11 +77,5 @@
 	            </h:panelGrid>
 	        </p:tab>
 	    </p:carousel>
-	    <div align="right">
-		    <p:link outcome="/views/user/index.xhtml" value="Go back"/>
-		    <h:form>
-			    <p:commandLink value="Logout" action="#{loginBean.logout()}"/>
-		    </h:form>
-	    </div>
 	</h:body>
 </html>

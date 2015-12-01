@@ -7,12 +7,39 @@
 
 	<h:head>
 		<title>Logout</title>
+		<style>
+		#action-box {
+			width: 300px;
+			padding: 20px;
+			margin: 100px auto;
+			background: #fff;
+			-webkit-border-radius: 2px;
+			-moz-border-radius: 2px;
+			border: 1px solid #000;
+		}
+		#menu {
+			width:100%;overflow: auto;padding: 10px 0px;
+		} 
+		#menu #left-menu {
+			float: left; width: 50%; text-align: left;
+		} 
+		#menu #right-menu {
+			float: right; width: 50%; text-align: right;
+		} 
+		.menu-item {
+			padding-left: 1em;
+		}
+		</style>
 	</h:head>
 	<h:body>
-		Logout
-		<div align="right">
-			<h:link outcome="/views/security/login" value="Log-in" style="padding-left: 1cm"/>
-			<h:link outcome="/welcome" value="Go to welcome" style="padding-left: 1cm"/>
+		<div id="menu">
+			<div id="left-menu">
+				<h:outputText value="Logout" />
+			</div>
+			<div id="right-menu">
+				<h:link outcome="/views/security/login" value="Log-in" styleClass="menu-item"/>
+				<h:link outcome="/welcome" value="Go to welcome" styleClass="menu-item"/>
+			</div>
 		</div>
 	</h:body>
 </html>

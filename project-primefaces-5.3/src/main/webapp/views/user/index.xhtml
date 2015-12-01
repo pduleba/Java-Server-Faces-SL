@@ -7,33 +7,65 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head>
-	<title>JSF 2.2 Example</title>
-</h:head>
-<h:body>
-	<p:outputPanel>
-		<f:facet name="header">
-			JSF 2.2 Example - index.xhtml
-	    </f:facet>
-		<h:form>
-			<h:message for="name" />
-
-			<h:outputLabel value="Enter name:" for="name" />
-			<h:inputText id="name" value="#{sessionBean.name}">
-				<f:validateRequired for="name" />
-			</h:inputText>
-			<h:commandButton value="Submit" action="#{sessionBean.createUser()}" />
-			<h:commandButton value="Show users"
-				action="#{sessionBean.showUsers()}" />
-		</h:form>
-		<div align="right">
+	<h:head>
+		<title>Index</title>
+		<style>
+		#action-box {
+			width: 300px;
+			padding: 20px;
+			margin: 100px auto;
+			background: #fff;
+			-webkit-border-radius: 2px;
+			-moz-border-radius: 2px;
+			border: 1px solid #000;
+		}
+		#menu {
+			width:100%;overflow: auto;padding: 10px 0px;
+		} 
+		#menu #left-menu {
+			float: left; width: 50%; text-align: left;
+		} 
+		#menu #right-menu {
+			float: right; width: 50%; text-align: right;
+		} 
+		.menu-item {
+			padding-left: 1em;
+		}
+		</style>
+	</h:head>
+	<h:body>
+		<div id="menu">
+			<div id="left-menu">
+				<h:outputText value="Index" />
+			</div>
+			<div id="right-menu">
+				<h:form>
+					<p:commandLink value="Logout" action="#{loginBean.logout()}" />
+				</h:form>
+			</div>
+		</div>
+		<div id="action-box">
 			<h:form>
-				<p:commandLink value="Logout" action="#{loginBean.logout()}" />
+				<h:panelGrid id="panel" columns="2" border="0" cellpadding="5"
+					cellspacing="1">
+					<f:facet name="header">
+						<h:outputText value="Create user" />
+					</f:facet>
+					
+					<h:outputLabel value="Enter name:" for="name" />
+					<h:inputText id="name" value="#{sessionBean.name}">
+						<f:validateRequired for="name" />
+					</h:inputText>
+					
+					<f:facet name="footer">
+						<h:panelGroup style="display:block; text-align:right">
+							<h:commandButton value="Submit" action="#{sessionBean.createUser()}" />
+							<h:commandButton value="Show users" action="#{sessionBean.showUsers()}" />
+							<h:messages showDetail="true" />
+						</h:panelGroup>
+					</f:facet>
+				</h:panelGrid>
 			</h:form>
-		</div>
-		<div>
-			<h:messages showDetail="true"/>
-		</div>
-	</p:outputPanel>
-</h:body>
+		</div>	
+	</h:body>
 </html>
