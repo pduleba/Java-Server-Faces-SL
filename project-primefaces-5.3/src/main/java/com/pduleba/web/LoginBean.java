@@ -2,7 +2,6 @@ package com.pduleba.web;
 
 import java.io.Serializable;
 
-import javax.annotation.Resource;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -30,8 +29,7 @@ public @Data class LoginBean implements Serializable {
 	private String userName;
 	private String password;
 
-	@Resource(name="authenticationManager")
-//	@Autowired
+	@Autowired
 	private AuthenticationManager authenticationManager;
 
 	@Autowired
