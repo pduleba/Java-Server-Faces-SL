@@ -47,7 +47,7 @@
 		<!-- Other -->
 		<junit.version>4.12</junit.version>
 		<lombok.version>1.16.6</lombok.version>
-		<slf4j-log4j12.version>1.7.13</slf4j-log4j12.version>
+		<slf4j.version>1.7.13</slf4j.version>
 
 		<!-- Build -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -127,6 +127,12 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
 			<version>${spring.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>commons-logging</artifactId>
+					<groupId>commons-logging</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -205,6 +211,12 @@
 			<groupId>org.apache.myfaces.core</groupId>
 			<artifactId>myfaces-impl</artifactId>
 			<version>${jsf.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>commons-logging</artifactId>
+					<groupId>commons-logging</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- Servlet API -->
@@ -288,6 +300,13 @@
 			<groupId>net.sf.barcode4j</groupId>
 			<artifactId>barcode4j</artifactId>
 			<version>${barcode4j.version}</version>
+			<exclusions>
+				<!-- Spring 4.2.3 - Not Using Commons Logging -->
+				<exclusion>
+					<artifactId>commons-logging</artifactId>
+					<groupId>commons-logging</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>net.glxn</groupId>
@@ -302,15 +321,25 @@
 			<version>${lombok.version}</version>
 		</dependency>
 
-		<!-- slf4j-log4j -->
+		<!-- Logging for application and Spring Framework -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+	    <dependency>
+	        <groupId>org.slf4j</groupId>
+	        <artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+	    </dependency>
+    	<dependency>
+			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
-			<version>${slf4j-log4j12.version}</version>
+			<version>${slf4j.version}</version>
 		</dependency>
 
 		<!-- Unit Test -->
-		<dependency>
+		<dependency>	
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>

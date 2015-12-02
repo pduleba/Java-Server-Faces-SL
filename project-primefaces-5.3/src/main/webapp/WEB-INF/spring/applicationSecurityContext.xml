@@ -12,7 +12,7 @@
 	<!-- Authentication configuration -->
 	<security:http authentication-manager-ref="authenticationManager" auto-config="true" use-expressions="true"> <!-- TODO -->
 
-		<!-- Login-in logic -->
+		<!-- Log-in logic -->
 		<security:form-login 
 			username-parameter="username"
 			password-parameter="password" 
@@ -20,7 +20,7 @@
 			login-page="/views/security/login.xhtml"
 			authentication-failure-url="/views/security/error.xhtml" />
 			
-		<!-- Logout logic -->
+		<!-- Log-out logic -->
 		<security:logout
 			invalidate-session="true"
 			logout-url="/logout"
