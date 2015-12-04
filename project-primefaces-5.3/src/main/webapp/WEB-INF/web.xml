@@ -12,7 +12,7 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	<listener>
-		<description>This listener is mainly for use with third-party servlets, e.g. the JSF FacesServlet.</description>
+		<description>Bind the HTTP request object to the Thread that is servicing that request, so session, request and application scope are available.</description>
 		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
 	</listener>
 
