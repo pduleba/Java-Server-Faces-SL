@@ -12,7 +12,7 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	<listener>
-		<description>This listener is mainly for use with third-party servlets, e.g. the JSF FacesServlet.</description>
+		<description>Bind the HTTP request object to the Thread that is servicing that request, so session, request and application scope are available.</description>
 		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
 	</listener>
 
@@ -31,8 +31,8 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			WEB-INF\spring\applicationContext.xml
-			WEB-INF\spring\applicationSecurityContext.xml
+			classpath:spring\applicationContext.xml
+			classpath:spring\applicationSecurityContext.xml
 		</param-value>
 	</context-param>
 
@@ -54,7 +54,7 @@
 	</session-config>
 
 	<welcome-file-list>
-		<welcome-file>welcome.jsp</welcome-file>
+		<welcome-file>welcome.xhtml</welcome-file>
 	</welcome-file-list>
 
 

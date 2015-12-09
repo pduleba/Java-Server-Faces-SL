@@ -26,14 +26,15 @@ public @Data @NoArgsConstructor class UserModel {
 	@Column(name="name")
 	private String name;
 	
-	@Column(name="password")
-	private String password;
+	@Column(name="password_hash")
+	private String passwordHash;
 
 	@Column(name="creation_date")
 	private Timestamp creationDate;
 	
-	public UserModel(String name) {
+	public UserModel(String name, String passwordHash) {
 		this.name = name;
+		this.passwordHash = passwordHash;
 		this.creationDate = new Timestamp(Calendar.getInstance().getTimeInMillis());
 	}
 
