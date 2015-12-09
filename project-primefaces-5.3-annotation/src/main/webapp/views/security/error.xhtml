@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:head>
+		<title>Error</title>
+		<style>
+		#action-box {
+			width: 300px;
+			padding: 20px;
+			margin: 100px auto;
+			background: #fff;
+			-webkit-border-radius: 2px;
+			-moz-border-radius: 2px;
+			border: 1px solid #000;
+		}
+		#menu {
+			width:100%;overflow: auto;padding: 10px 0px;
+		} 
+		#menu #left-menu {
+			float: left; width: 50%; text-align: left;
+		} 
+		#menu #right-menu {
+			float: right; width: 50%; text-align: right;
+		} 
+		.menu-item {
+			padding-left: 1em;
+		}
+		</style>
+	</h:head>
+	<h:body>
+		<div id="menu">
+			<div id="left-menu">
+				<h:outputText value="Error" />
+			</div>
+			<div id="right-menu">
+				<h:link outcome="/views/security/login" value="Log-in" styleClass="menu-item"/>
+			</div>
+		</div>
+	</h:body>
+</html>

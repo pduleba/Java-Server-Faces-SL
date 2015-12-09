@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:head>
+		<title>Response</title>
+		<style>
+		#action-box {
+			width: 300px;
+			padding: 20px;
+			margin: 100px auto;
+			background: #fff;
+			-webkit-border-radius: 2px;
+			-moz-border-radius: 2px;
+			border: 1px solid #000;
+		}
+		#menu {
+			width:100%;overflow: auto;padding: 10px 0px;
+		} 
+		#menu #left-menu {
+			float: left; width: 50%; text-align: left;
+		} 
+		#menu #right-menu {
+			float: right; width: 50%; text-align: right;
+		} 
+		.menu-item {
+			padding-left: 1em;
+		}
+		</style>
+	</h:head>
+	<h:body bgcolor="white">
+		<div id="menu">
+			<div id="left-menu">
+				<h:outputText value="Response" />
+			</div>
+			<div id="right-menu">
+			    <p:link outcome="/views/user/index.xhtml" value="Go back"/>
+			    <h:form>
+				    <p:commandLink value="Logout" action="#{loginBean.logout()}"/>
+			    </h:form>
+			</div>
+		</div>
+		<p:carousel numVisible="1" effect="easeInStrong" headerText="Tabs" style="margin-bottom:0">
+	        <p:tab title="Users from DB">
+	            <h:panelGrid columns="2" cellpadding="10">
+	                <h:outputText value="Users from DB:" />
+	            </h:panelGrid>
+	            <p:dataTable var="user" value="#{sessionBean.users}">
+	            	<p:column headerText="Id">
+	            		<h:outputText value="#{user.id}" />
+	            	</p:column>
+	            	<p:column headerText="Name">
+	            		<h:outputText value="#{user.name}" />
+	            	</p:column>
+	            	<p:column headerText="Creation date">
+	            		<h:outputText value="#{user.creationDate}" converter="TimestampConverter"/>
+	            	</p:column>
+	            </p:dataTable>
+	        </p:tab>
+	        <p:tab title="Submit time">
+	            <h:panelGrid columns="2" cellpadding="10">
+	                <h:outputText value="Submit time : " />
+					<h:outputText value="#{sessionBean.time}" />
+	            </h:panelGrid>
+	        </p:tab>
+	        <p:tab title="WWW Link">
+	            <h:panelGrid columns="2" cellpadding="10">
+					<p:panelGrid columns="2">
+						<h:outputText value="QR" />
+						<p:barcode value="https://www.google.pl/#q=#{sessionBean.name}" type="qr" />
+					</p:panelGrid>
+	            </h:panelGrid>
+	        </p:tab>
+	    </p:carousel>
+	</h:body>
+</html>

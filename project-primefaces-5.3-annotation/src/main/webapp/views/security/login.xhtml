@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:head>
+		<title>Welcome</title>
+		<style>
+		#action-box {
+			width: 300px;
+			padding: 20px;
+			margin: 100px auto;
+			background: #fff;
+			-webkit-border-radius: 2px;
+			-moz-border-radius: 2px;
+			border: 1px solid #000;
+		}
+		#menu {
+			width:100%;overflow: auto;padding: 10px 0px;
+		} 
+		#menu #left-menu {
+			float: left; width: 50%; text-align: left;
+		} 
+		#menu #right-menu {
+			float: right; width: 50%; text-align: right;
+		} 
+		.menu-item {
+			padding-left: 1em;
+		}
+		</style>
+	</h:head>
+	<h:body>
+		<div id="menu">
+			<div id="left-menu">
+				<h:outputText value="Login page" />
+			</div>
+			<div id="right-menu">
+			</div>
+		</div>
+		<div id="action-box">
+			<h:form>
+				<h:panelGrid id="panel" columns="2" border="0" cellpadding="5"
+					cellspacing="1">
+					<f:facet name="header">
+						<h:outputText value="Log-in user" />
+					</f:facet>
+					
+                    <h:outputText id="outTxtUserNameId" value="Username: " name="outTxtUserNameNm" />
+                    <h:inputText id="userName" required="true" value="#{loginBean.userName}" requiredMessage="Please enter username" />
+	                <h:outputText id="outTxtPasswordId" value="Password: " name="outTxtPasswordNm" />
+	                <h:inputSecret id="password"  required="true" value="#{loginBean.password}" requiredMessage="Please enter password" name="inTxtPasswordNm" />
+					
+					<f:facet name="footer">
+						<h:panelGroup style="display:block; text-align:right">
+	                    <h:commandButton id="btnLoginId" value="Login" action="#{loginBean.login()}" styleClass="loginPanelBtn" />
+							<h:messages showDetail="true" />
+						</h:panelGroup>
+					</f:facet>
+				</h:panelGrid>
+			</h:form>
+		</div>
+	</h:body>
+</html>
