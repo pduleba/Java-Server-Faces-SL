@@ -15,21 +15,21 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="users")
-@SequenceGenerator(name="user_db_seq", allocationSize=1, sequenceName="USERS_SEQ")
+@Table(name="T_USERS")
 public @Data @NoArgsConstructor class UserModel {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="user_db_seq")
+	@GeneratedValue(generator="USER_DB_SEQ", strategy=GenerationType.SEQUENCE)
+	@SequenceGenerator(name="USER_DB_SEQ", sequenceName="USERS_SEQ", allocationSize=1, initialValue = 1)
 	private Long id;
 	
-	@Column(name="name")
+	@Column(name="NAME")
 	private String name;
 	
-	@Column(name="password_hash")
+	@Column(name="PASSWORD_HASH")
 	private String passwordHash;
 
-	@Column(name="creation_date")
+	@Column(name="CREATION_DATE")
 	private Timestamp creationDate;
 	
 	public UserModel(String name, String passwordHash) {
