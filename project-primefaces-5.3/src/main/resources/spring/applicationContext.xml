@@ -12,7 +12,7 @@
 	<context:component-scan base-package="com.pduleba.spring, com.pduleba.web" />
 	<context:annotation-config />
 	<context:property-placeholder properties-ref="appConfig"/> 
-	<util:properties id="appConfig" location="classpath:config/database/database.properties" />
+	<util:properties id="appConfig" location="classpath:config/database/application.properties" />
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
