@@ -1,0 +1,228 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:head>
+		<title>CV</title>
+		<script type="text/javascript">
+			function validateNumber() 
+			{
+				var ageReg = /^\d+$/;
+				var age = $.trim($(PrimeFaces.escapeClientId("userForm:children")).val());
+				if(age ==''){
+					$(PrimeFaces.escapeClientId("userForm:childrenMsg")).text("");
+					$(PrimeFaces.escapeClientId("userForm:childrenMsg")).attr("class", "");
+					return;
+				}
+				if( ageReg.test( age ) ) {
+				  	$(PrimeFaces.escapeClientId("userForm:childrenMsg")).text("Valid number");		
+				   	$(PrimeFaces.escapeClientId("userForm:childrenMsg")).attr("class", "ui-messages-info ui-widget ui-corner-all ui-messages-info-summary");		   
+				} else {
+					$(PrimeFaces.escapeClientId("userForm:childrenMsg")).text("Invalid number");
+					$(PrimeFaces.escapeClientId("userForm:childrenMsg")).attr("class", "ui-message-error ui-widget ui-corner-all ui-message-error-detail");
+			   }
+			}
+		</script>
+	</h:head>
+
+	<h:form id="userForm">
+		<p:growl id="notificationBar" sticky="true" showDetail="true" life="300"/>
+		
+		<p:wizard widgetVar="wizard" showNavBar="true" >
+			<p:tab id="personal" title="Personal data">
+				<p:panel header="Personal">
+					<p:messages globalOnly="true"/>
+					<h:panelGrid columns="3">
+	                    <h:outputText value="Firstname: *" />
+	                    <p:inputText id="firstName" value="#{viewController.user.firstName}" label="Firstname" required="true"/>
+		                <p:message id="firstNameMsg" for="firstName"/>
+	
+	                    <h:outputText value="Lastname: *" />
+	                    <p:inputText id="lastName" value="#{viewController.user.lastName}" label="Lastname" >
+	                    	<f:validateLength minimum="5" />
+	                    </p:inputText>
+		                <p:message id="lastNameMsg" for="lastName"/>
+
+	                    <h:outputText value="Phone: *" />
+	                    <p:inputMask id="phone" mask="(+99) 999-999-999" value="#{viewController.user.phone}" label="Phone" required="true"/>
+		                <p:message id="phoneMsg" for="phone"/>
+
+	                    <h:outputText value="Email: *" />
+	                    <p:inputText id="email" value="#{viewController.user.email}" label="Email" required="true">
+	                    	<f:validateLength minimum="5"/>
+	                    	<f:validateRegex pattern=".+@.+\..+" />
+	                    	<p:ajax event="keyup" update="emailMsg"/>
+	                    </p:inputText>
+	                    <p:message id="emailMsg" for="email"/>
+		                
+		                <h:outputText value="Children:" />
+	                    <p:inplace emptyLabel="Any children?">
+		                    <p:inputText id="children" onchange="validateNumber()" value="#{viewController.user.childrenNumber}" label="Children" />
+	                    </p:inplace>
+		                <p:message id="childrenMsg" for="children"/>
+		                
+						<h:outputText value="Birth Date: *" />
+						<p:calendar id="birthDate" value="#{viewController.user.birthDate}" navigator="true" required="true"
+							pattern="#{viewController.dateFormat}" converter="dateConverter" />
+						<p:message id="birthDateMsg" for="birthDate"/>
+					</h:panelGrid>
+				</p:panel>
+			</p:tab>
+	
+			<p:tab id="skills" title="Skills">
+				<p:panel header="Skills">
+					<p:messages globalOnly="true"/>
+			    	<h:panelGrid columns="2" >
+				        <h:outputText value="Favourite IDE: " />
+				        <p:selectOneMenu value="#{viewController.user.skills.favouriteEditor}" >
+				            <f:selectItem itemLabel="Select One" itemValue="" />
+				            <f:selectItem itemLabel="Eclipse IDE" itemValue="eclipse" />
+				            <f:selectItem itemLabel="NetBeans" itemValue="netbeans" />
+				            <f:selectItem itemLabel="IntelliJ IDEA" itemValue="intellij" />
+				        </p:selectOneMenu>
+			    	
+				    	<h:outputText value="MainOS: " />  
+				        <p:selectOneRadio id="mainOS" value="#{viewController.user.skills.mainOS}" >  
+				            <f:selectItem itemLabel="Windows" itemValue="windows" />  
+				            <f:selectItem itemLabel="Ubuntu" itemValue="linux-ubuntu" />  
+				            <f:selectItem itemLabel="Debian" itemValue="linux-debian" />  
+				            <f:selectItem itemLabel="Mac OS" itemValue="unix" />  
+				        </p:selectOneRadio>  
+				    	
+				        <h:outputText value="Master degree: " />  
+						<p:selectBooleanButton value="#{viewController.user.skills.masterDegree}" onLabel="Yes" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close">  
+							<p:ajax update="notificationBar" listener="#{viewController.handleMasterDegreeChange()}" />  
+						</p:selectBooleanButton>
+						
+				        <h:outputText value="Main language: " />
+						<p:autoComplete id="mainLanguage" value="#{viewController.user.skills.mainLanguage}" completeMethod="#{dataProvider.findLanguages}" />
+						
+				        <h:outputText value="Frameworks: " />
+						<p:autoComplete id="frameworks"
+							value="#{viewController.user.skills.frameworks}" completeMethod="#{dataProvider.findFrameworks}" maxResults="10"
+							queryDelay="400" effect="slide" multiple="true">
+						</p:autoComplete>
+						
+						<h:outputText value="Favourite Platform: " />
+				        <p:selectOneMenu value="#{viewController.user.skills.favouritePlatform}" var="p" effect="fade" converter="platformConverter"> 
+				            <f:selectItems value="#{dataProvider.platforms}" var="platform" itemLabel="#{platform.description}" itemValue="#{platform}"/>
+				            <p:column>  
+								#{p.description}  
+							</p:column>
+							<p:column>  
+								<p:graphicImage value="/resources/img/platforms/#{p.img}.png" width="32px" height="32px"/>  
+							</p:column>  
+				        </p:selectOneMenu>
+						
+			    	</h:panelGrid>
+				</p:panel>
+			</p:tab>
+	
+			<p:tab id="aboutMe" title="About Me">
+				<p:panel header="About">
+					<p:messages globalOnly="true"/>
+					<h:panelGrid columns="2">
+			        	<h:outputText value="Details: " />
+			        	<p:editor value="#{viewController.user.aboutMe.details}" height="150" />
+			        	
+			        	<h:outputText value="Hobbies: " />
+					    <p:pickList id="pickList" 
+					    			value="#{viewController.hobbies}" 
+					    			var="privilege" 
+					                itemLabel="#{privilege}" 
+					                itemValue="#{privilege}">
+					          	<f:facet name="sourceCaption">Available Hobbies</f:facet>
+					        	<f:facet name="targetCaption">Selected Hobbies</f:facet>
+					    </p:pickList>
+			        </h:panelGrid>
+				</p:panel>
+			</p:tab>
+	
+			<p:tab id="image" title="Avatar">
+				<p:panel header="Image">
+					<p:messages globalOnly="true"/>
+					<h:panelGrid columns="2">
+	                    <h:outputText value="Select Your avatar: *" />
+			    		<p:fileUpload fileUploadListener="#{viewController.upload}" auto="true" update="notificationBar" />
+					</h:panelGrid>
+				</p:panel>
+			</p:tab>
+	
+			<p:tab id="summary" title="Summary">
+				<p:panel header="Summary">
+					<p:accordionPanel>
+						<p:tab title="Personal data">
+							<h:panelGrid columns="2">
+			                    <h:outputText value="Firstname: " />
+			                    <h:outputText value="#{viewController.user.firstName}"/>
+			
+			                    <h:outputText value="Lastname: " />
+			                    <h:outputText value="#{viewController.user.lastName}" />
+			
+			                    <h:outputText value="Phone: " />
+			                    <h:outputText value="#{viewController.user.phone}"/>
+			
+			                    <h:outputText value="Email: " />
+			                    <h:outputText value="#{viewController.user.email}" />
+			                    
+			                    <h:outputText value="Children:" />
+			                    <h:outputText value="#{viewController.user.childrenNumber}" />
+				                
+								<h:outputText value="Birth Date: " />
+								<h:outputText value="#{viewController.user.birthDate}" converter="dateConverter" />
+							</h:panelGrid>
+				        </p:tab>
+        			</p:accordionPanel>
+					<p:accordionPanel>
+						<p:tab title="Skills">
+							<h:panelGrid columns="2">
+						        <h:outputText value="Favourite IDE: " />
+						        <h:outputText value="#{viewController.user.skills.favouriteEditor}" />
+				  
+						        <h:outputText value="MainOS: " />  
+						        <h:outputText value="#{viewController.user.skills.mainOS}" />  
+					        
+						        <h:outputText value="Master degree: " />  
+								<h:outputText value="#{viewController.user.skills.masterDegree}" />
+					
+						        <h:outputText value="Favourite Platform: " />
+						        <h:outputText value="#{viewController.user.skills.favouritePlatform}" />
+					        
+						        <h:outputText value="Main language: " />
+								<h:outputText value="#{viewController.user.skills.mainLanguage}" />
+		
+						        <h:outputText value="Frameworks: " />
+								<ui:repeat value="#{viewController.user.skills.frameworks}" var="value">
+								    #{value}
+								</ui:repeat>
+							</h:panelGrid>							
+				        </p:tab>
+        			</p:accordionPanel>
+					<p:accordionPanel>
+						<p:tab title="About me &#38; avatar">
+							<h:panelGrid columns="2">
+						        <h:outputText value="Details: " />
+						        <h:outputText value="#{viewController.user.aboutMe.details}" escape="false"/>
+
+						        <h:outputText value="Frameworks: " />
+								<ui:repeat value="#{viewController.hobbies.target}" var="hobby">
+								    #{hobby}
+								</ui:repeat>
+
+			                    <h:outputText value="Your avatar: " />
+					    		<p:commandButton value="Download" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
+							        <p:fileDownload value="#{viewController.user.avatar}" />
+							    </p:commandButton>
+							</h:panelGrid>							
+				        </p:tab>
+        			</p:accordionPanel>
+        			
+        			<p:commandButton value="Send" actionListener="#{viewController.send()}" update="notificationBar" process="@this" />
+					<p:barcode id="qr-link" value="https://www.pgs-soft.com" type="qr"/>
+        		</p:panel>
+			</p:tab>
+		</p:wizard>
+	</h:form>
+</html>
